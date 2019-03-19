@@ -18,8 +18,8 @@ public class Player : MonoBehaviour
     public Text lifeCounter;
     public Text scoreCounter;
     public Text startText;
-    public int playerLives;
-    public int playerScore;
+    public static int playerLives;
+    public static int playerScore;
 
 
     public void LoseLife()
@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
         Time.timeScale = 0;
         playerLives = 10;
         playerScore = 0;
+        
 
         UpdateCounters();
     }
@@ -60,6 +61,11 @@ public class Player : MonoBehaviour
         if (Time.timeScale == 1)
         {
             startText.gameObject.SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            LoseLife();
         }
         UpdateCounters();
     }

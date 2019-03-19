@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
+/// <summary>
+/// This class, though it's a bit messy, is what sorts and prints the high score values on the UI, as well as stores
+/// them to be used in playerprefs.
+/// </summary>
 
 public class ScoreTracker : MonoBehaviour
 {
-    public static List<int> highScores = new List<int>();
+    public static List<int> highScores = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public Canvas scoreCanvas;
     public Text score1;
     public Text score2;
@@ -37,18 +41,19 @@ public class ScoreTracker : MonoBehaviour
 
     public static void CheckScore(int finalScore)
     {
-        foreach (int score in highScores)
-        {
-            if (finalScore >= score)
-            {
-                highScores.Insert(finalScore, highScores.IndexOf(score));
-                break;
-            }
-        }
+         foreach (int score in highScores)
+          {
+             if (finalScore >= score)
+              {
+                 highScores.Insert(highScores.IndexOf(score), finalScore);
+                 break;
+              }
+          }
     }
 
     public void ShowScores()
     {
+        SetScores();
         scoreCanvas.gameObject.SetActive(!isActive);
         isActive = !isActive;
     }
@@ -58,15 +63,5 @@ public class ScoreTracker : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    void Start()
-    {
-        Scene currentScene = SceneManager.GetActiveScene();
-        string sceneName = currentScene.name;
-
-        if (sceneName == "EndScene")
-        {
-            scoreCanvas.gameObject.SetActive(true);
-        }
-    }
 
 }
