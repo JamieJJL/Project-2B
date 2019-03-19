@@ -64,12 +64,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             Time.timeScale = 1;
-            startText.gameObject.SetActive(false);
         }
 
+        if (Time.timeScale == 1)
+        {
+            startText.gameObject.SetActive(false);
+        }
         UpdateCounters();
     }
 
