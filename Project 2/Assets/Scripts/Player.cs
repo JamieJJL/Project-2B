@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The Player class contains functions that it uses in order to both deduct lives from the Player, as well
@@ -30,7 +31,7 @@ public class Player : MonoBehaviour
         if (playerLives == 0)
         {
             loss.Play();
-            ResetGame();
+            SceneManager.LoadScene("EndScene");
         }
     }
     public void ScoreUp()
