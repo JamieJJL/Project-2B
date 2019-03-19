@@ -21,16 +21,13 @@ public class Player : MonoBehaviour
     public int playerLives;
     public int playerScore;
 
-    private Vector3 initialPosition;
-    private Vector3 spawnerPosition;
-
 
     public void LoseLife()
     {
         playerLives -= 1;
         if (playerLives == 0)
         {
-            loss.Play();
+            ScoreTracker.CheckScore(playerScore);
             SceneManager.LoadScene("EndScene");
         }
     }
@@ -46,19 +43,9 @@ public class Player : MonoBehaviour
 
         UpdateCounters();
     }
-    public void ResetGame()
-    {
-        StartGame();
-        SpawnManager sManager = spawner.GetComponent<SpawnManager>();
-        sManager.EmptyContainer();
-        transform.position = initialPosition;
-        spawner.transform.position = spawnerPosition;
-    }
     // Start is called before the first frame update
     void Awake()
     {
-        initialPosition = transform.position;
-        spawnerPosition = spawner.transform.position;
         StartGame();
     }
 

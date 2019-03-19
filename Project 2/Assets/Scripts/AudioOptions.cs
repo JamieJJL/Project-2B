@@ -11,7 +11,7 @@ using UnityEngine.Audio;
 
 public class AudioOptions : MonoBehaviour
 {
-    public AudioMixer masterMixer;
+    public static AudioMixer masterMixer;
     public AudioSource musicSource;
     public AudioSource starSpawn;
     public AudioSource blackHole;

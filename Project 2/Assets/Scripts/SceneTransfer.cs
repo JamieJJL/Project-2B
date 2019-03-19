@@ -12,6 +12,8 @@ public class SceneTransfer : MonoBehaviour
 
     public void QuitGame()
     {
+        PrefTracker.SaveScores(ScoreTracker.highScores);
+        PrefTracker.SaveAudio();
         Application.Quit();
     }
 
