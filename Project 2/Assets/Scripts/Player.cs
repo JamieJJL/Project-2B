@@ -18,11 +18,8 @@ public class Player : MonoBehaviour
     public Text lifeCounter;
     public Text scoreCounter;
     public Text startText;
-    public int playerLives;
-    public int playerScore;
-
-    private Vector3 initialPosition;
-    private Vector3 spawnerPosition;
+    public static int playerLives;
+    public static int playerScore;
 
 
     public void LoseLife()
@@ -30,7 +27,7 @@ public class Player : MonoBehaviour
         playerLives -= 1;
         if (playerLives == 0)
         {
-            loss.Play();
+            ScoreTracker.CheckScore(playerScore);
             SceneManager.LoadScene("EndScene");
         }
     }
@@ -43,22 +40,13 @@ public class Player : MonoBehaviour
         Time.timeScale = 0;
         playerLives = 10;
         playerScore = 0;
+        
 
         UpdateCounters();
-    }
-    public void ResetGame()
-    {
-        StartGame();
-        SpawnManager sManager = spawner.GetComponent<SpawnManager>();
-        sManager.EmptyContainer();
-        transform.position = initialPosition;
-        spawner.transform.position = spawnerPosition;
     }
     // Start is called before the first frame update
     void Awake()
     {
-        initialPosition = transform.position;
-        spawnerPosition = spawner.transform.position;
         StartGame();
     }
 
@@ -73,6 +61,11 @@ public class Player : MonoBehaviour
         if (Time.timeScale == 1)
         {
             startText.gameObject.SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            LoseLife();
         }
         UpdateCounters();
     }
